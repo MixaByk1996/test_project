@@ -16,10 +16,11 @@ class BookType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image', FileType::class)
+            ->add('image')
             ->add('year_public')
             ->add('authorBooks')
         ;
+        //FileType::class
     }
 
     public function configureOptions(OptionsResolver $resolver): void

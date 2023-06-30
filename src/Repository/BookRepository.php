@@ -2,12 +2,14 @@
 
 namespace App\Repository;
 
+use App\Entity\Author;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @extends ServiceEntityRepository<Book>
@@ -47,9 +49,20 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
-    public function getCount(int $author_id){
+    public function setCountBooksOfAuthor(Author $author){
+        $count = 0;
+        $link = mysqli_connect('127.0.0.1', "root", "кщще", "test");
+        $sql = 'SELECT COUNT(book_id) FROM author_books WHERE author_id = '.$author->getId();
+        if ($res = mysqli_query($link, $sql)) {
+            if (mysqli_num_rows($res) > 0) {
+                while ($row = mysqli_fetch_array($res)){
+                    $count = intval($row[0]);
+                }
+            }
+        }
 
-
+        $sql = 'UPDATE author SET count_books = '.$count.' where id = '.$author->getId();
+        mysqli_query($link, $sql);
     }
     // /**
     //  * @return Book[] Returns an array of Book objects

@@ -52,8 +52,11 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $book->setImage(file_get_contents($book->getImage()));
+
             $bookRepository->add($book);
+            foreach ($book->getAuthorBooks() as $authorBook){
+                $bookRepository->setCountBooksOfAuthor($authorBook);
+            }
             return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
         }
 

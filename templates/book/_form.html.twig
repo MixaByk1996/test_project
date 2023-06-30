@@ -1,6 +1,21 @@
-<div class="form-control">
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Сохранить') }}</button>
-{{ form_end(form) }}
+<div class="form-group">
+    <div class="form-group">
+        {{ form_row(form.name, {'label' : 'Название','attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.description, {'label' : 'Описание','attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.image, {'label' : 'Обложка','attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.year_public, {'label' : 'Год публикации','attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.authorBooks, {'label' : 'Список авторов','attr': {'class': 'form-control'}}) }}
+    </div>
+    <button class="btn {{ button_color|default('btn-outline-primary') }}  mt-3">{{ button_label|default('Сохранить') }}</button>
 </div>
+{{ form_end(form) }}

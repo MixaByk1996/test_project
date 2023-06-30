@@ -1,77 +1,138 @@
-<!DOCTYPE html>
+{#<!DOCTYPE html>#}
 
-<title>Список книг</title>
-<style>
-    .styled-table {
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.9em;
-        font-family: sans-serif;
-        min-width: 400px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-    .styled-table thead tr {
-        background-color: #009879;
-        color: #ffffff;
-        text-align: left;
-    }
+{#<title>Список книг</title>#}
+{#<style>#}
+{#    .styled-table {#}
+{#        border-collapse: collapse;#}
+{#        margin: 25px 0;#}
+{#        font-size: 0.9em;#}
+{#        font-family: sans-serif;#}
+{#        min-width: 400px;#}
+{#        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);#}
+{#    }#}
+{#    .styled-table thead tr {#}
+{#        background-color: #009879;#}
+{#        color: #ffffff;#}
+{#        text-align: left;#}
+{#    }#}
 
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-    }
+{#    .styled-table th,#}
+{#    .styled-table td {#}
+{#        padding: 12px 15px;#}
+{#    }#}
 
-    .styled-table tbody tr {
-        border-bottom: 1px solid #dddddd;
-    }
+{#    .styled-table tbody tr {#}
+{#        border-bottom: 1px solid #dddddd;#}
+{#    }#}
 
-    .styled-table tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
-    }
+{#    .styled-table tbody tr:nth-of-type(even) {#}
+{#        background-color: #f3f3f3;#}
+{#    }#}
 
-    .styled-table tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
-    }
+{#    .styled-table tbody tr:last-of-type {#}
+{#        border-bottom: 2px solid #009879;#}
+{#    }#}
 
-    .styled-table tbody tr.active-row {
-        font-weight: bold;
-        color: #009879;
-    }
-</style>
+{#    .styled-table tbody tr.active-row {#}
+{#        font-weight: bold;#}
+{#        color: #009879;#}
+{#    }#}
+{#</style>#}
+{#{% block body %}#}
+{#    <h1>Список книг</h1>#}
+{#    <a href="{{ path('app_author_index') }}">Перейти к списку авторов</a>#}
+{#    <table class="styled-table">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <th>Название</th>#}
+{#                <th>Описание</th>#}
+{#                <th>Обложка</th>#}
+{#                <th>Год выпуска</th>#}
+{#                <th>Действия</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for book in books %}#}
+{#            <tr>#}
+{#                <td>{{ book.id }}</td>#}
+{#                <td>{{ book.name }}</td>#}
+{#                <td>{{ book.description }}</td>#}
+{#                <td><img alt="" src="{{ book.image}}" /></td>#}
+{#                <td>{{ book.yearPublic }}</td>#}
+{#                <td>#}
+{#                    <a href="{{ path('app_book_show', {'id': book.id}) }}">Показать</a>#}
+{#                    <a href="{{ path('app_book_edit', {'id': book.id}) }}">Обновить</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="6">Отсувствуют данные</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+
+{#    <a href="{{ path('app_book_new') }}">Добавить</a>#}
+{#{% endblock %}#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Список книг{% endblock %}
+
 {% block body %}
-    <h1>Список книг</h1>
-    <a href="{{ path('app_author_index') }}">Перейти к списку авторов</a>
-    <table class="styled-table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Название</th>
-                <th>Описание</th>
-                <th>Обложка</th>
-                <th>Год выпуска</th>
-                <th>Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{ book.id }}</td>
-                <td>{{ book.name }}</td>
-                <td>{{ book.description }}</td>
-                <td><img alt="" src="{{ book.image.getImg()}}" /></td>
-                <td>{{ book.yearPublic }}</td>
-                <td>
-                    <a href="{{ path('app_book_show', {'id': book.id}) }}">Показать</a>
-                    <a href="{{ path('app_book_edit', {'id': book.id}) }}">Обновить</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">Отсувствуют данные</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Список книг</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-primary" href="{{ path('app_book_new') }}">
+                    Добавить данные книги
+                </a>
+                <a class="btn btn-outline-primary" href="{{ path('app_author_index') }}">
+                    Перейти в список авторов
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Id</th>
+                        <th>Название</th>
+                        <th>Авторы</th>
+                        <th>Описание</th>
+                        <th>Обложка</th>
+                        <th>Год выпуска</th>
+                        <th width="240px">Действия</th>
+                    </tr>
+                    {% for book in books %}
+                        <tr>
+                            <td>{{ book.id }}</td>
+                            <td>{{ book.name }}</td>
+                            <td>{{ book.getAuthorsList()  }}</td>
+                            <td>{{ book.description }}</td>
+                            <td><img alt="" src="{{ book.image}}" /></td>
+                            <td>{{ book.yearPublic }}</td>
+                            <td>
+                                <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}" onsubmit="return confirm('Вы действительно хотите удалить запись?');">
+                                    <a
+                                            class="btn btn-outline-info"
+                                            href="{{ path('app_book_show', {'id': book.id}) }}">
+                                        Подробнее
+                                    </a>
+                                    <a
+                                            class="btn btn-outline-success"
+                                            href="{{ path('app_book_edit', {'id': book.id}) }}">
+                                        Редактирование
+                                    </a>
 
-    <a href="{{ path('app_book_new') }}">Добавить</a>
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ book.id) }}">
+                                    <button class="btn btn-outline-danger">Удалить</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

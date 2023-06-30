@@ -1,63 +1,23 @@
-<!DOCTYPE html>
 
-<title>Author</title>
-<style>
-    .styled-table {
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.9em;
-        font-family: sans-serif;
-        min-width: 400px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-    .styled-table thead tr {
-        background-color: #009879;
-        color: #ffffff;
-        text-align: left;
-    }
+{% extends 'base.html.twig' %}
 
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-    }
+{% block title %}Автор{% endblock %}
 
-    .styled-table tbody tr {
-        border-bottom: 1px solid #dddddd;
-    }
-
-    .styled-table tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
-    }
-
-    .styled-table tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
-    }
-
-    .styled-table tbody tr.active-row {
-        font-weight: bold;
-        color: #009879;
-    }
-</style>
 {% block body %}
-    <h1>Автор</h1>
-
-    <table class="styled-table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ author.id }}</td>
-            </tr>
-            <tr>
-                <th>ФИО</th>
-                <td>{{ author.name }}</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_author_index') }}">Назад</a>
-
-    <a href="{{ path('app_author_edit', {'id': author.id}) }}">Изменить</a>
-
-    {{ include('author/_delete_form.html.twig') }}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Данные автора</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_author_index') }}">
+                    Показать список авторов
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">ФИО:</b>
+                <p>{{ author.name }}</p>
+                <b class="text-muted">Кол-во книг:</b>
+                <p>{{ author.getCountBooks() }}</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

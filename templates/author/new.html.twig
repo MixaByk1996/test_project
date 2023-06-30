@@ -1,11 +1,19 @@
-<!DOCTYPE html>
-
-<title>Новый автор</title>
-
+{% extends 'base.html.twig' %}
+ 
+{% block title %}Новый автор{% endblock %}
+ 
 {% block body %}
-    <h1>Добавить нового автора</h1>
-
-    {{ include('author/_form.html.twig') }}
-
-    <a href="{{ path('app_author_index') }}">back to list</a>
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Добавить автора</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_author_index') }}">
+                    Показать список авторов
+                </a>
+            </div>
+            <div class="card-body">
+                {{ include('author/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

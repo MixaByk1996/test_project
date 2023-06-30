@@ -57,6 +57,15 @@ class Book
         return $this->authorBooks;
     }
 
+    public function getAuthorsList(){
+        $str = '';
+
+        foreach ($this->authorBooks as $authorBook){
+            $str .= $authorBook->getName() . ';';
+        }
+
+        return $str;
+    }
     /**
      * @param $authorBooks
      */
