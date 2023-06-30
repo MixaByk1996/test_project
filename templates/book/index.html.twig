@@ -81,6 +81,45 @@
 {% block title %}Список книг{% endblock %}
 
 {% block body %}
+    <style>
+        #filterInput {
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+    </style>
+    <script>
+        function filterFunction() {
+            var input, filter, table, tr,tds, td, i,j, txtValue;
+            input = document.getElementById("filterInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("booksTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                tds = tr[i].getElementsByTagName("td");
+                for(j = 0; j < tds.length; j++)
+                {
+                    if(j !== 4 || j !== 6){
+                        td = tds[j];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                                break;
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    </script>
     <div class="container">
         <h2 class="text-center mt-5 mb-3">Список книг</h2>
         <div class="card">
@@ -93,7 +132,8 @@
                 </a>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
+                <input type="text" id="filterInput" onkeyup="filterFunction()" placeholder="Введите текст" title="Type in a name">
+                <table id="booksTable" class="table table-bordered">
                     <tr>
                         <th>Id</th>
                         <th>Название</th>

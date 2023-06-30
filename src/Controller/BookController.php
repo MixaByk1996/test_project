@@ -86,6 +86,9 @@ class BookController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bookRepository->add($book);
+            foreach ($book->getAuthorBooks() as $authorBook){
+                $bookRepository->setCountBooksOfAuthor($authorBook);
+            }
             return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
         }
 
