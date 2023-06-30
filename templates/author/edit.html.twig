@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Обновить</title>
+
+{% block body %}
+    <h1>Обновить</h1>
+
+    {{ include('author/_form.html.twig', {'button_label': 'Обновить'}) }}
+
+    <a href="{{ path('app_author_index') }}">Назад</a>
+
+    {{ include('author/_delete_form.html.twig') }}
+{% endblock %}
