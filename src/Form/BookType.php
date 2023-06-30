@@ -16,7 +16,12 @@ class BookType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image')
+            ->add('image', FileType::class,[
+                'mapped' => false,
+                'attr' => [
+                    'accept' => "image/*"
+                ],
+            ])
             ->add('year_public')
             ->add('authorBooks')
         ;

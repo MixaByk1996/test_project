@@ -21,18 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
 
-//    public static function setCountBooksForAuthors(Book $book, ObjectManager $em){
-//        $authors = $book->getAuthorBooks();
-//
-
-//
-////            $current_authors = self::$authorRepository->findBy(['author_id' => $author->author_id]);
-////            dd($current_authors);
-////            $sum = self::$entityManager->getRepository(Author::class)->createQueryBuilder();
-//        }
-//    }
-
-
     /**
      * @Route("/", name="app_book_index", methods={"GET"})
      */
@@ -52,7 +40,8 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $file = $form['image']->getData();
+            $book->setImage(file_get_contents($file));
             $bookRepository->add($book);
             foreach ($book->getAuthorBooks() as $authorBook){
                 $bookRepository->setCountBooksOfAuthor($authorBook);
@@ -85,6 +74,8 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form['image']->getData();
+            $book->setImage(file_get_contents($file));
             $bookRepository->add($book);
             foreach ($book->getAuthorBooks() as $authorBook){
                 $bookRepository->setCountBooksOfAuthor($authorBook);

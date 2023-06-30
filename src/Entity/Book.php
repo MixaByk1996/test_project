@@ -152,14 +152,22 @@ class Book
         return $this;
     }
 
-    public function getImage()
+    public function getImage(): ?string
     {
-        return $this->image;
+        $imageBase64 = '';
+        if (null === $this->image) {
+            return null;
+        }
+            $data = stream_get_contents($this->image);
+            fclose($this->image);
+        return base64_encode($data);
+
     }
 
     public function setImage($image): self
     {
         $this->image = $image;
+
 
         return $this;
     }

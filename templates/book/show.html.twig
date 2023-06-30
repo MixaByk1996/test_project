@@ -90,13 +90,14 @@
                 <p>{{ book.name }}</p>
                 <b class="text-muted">Описание:</b>
                 <p>{{ book.description }}</p>
-                <b class="text-muted">Обложка:</b>
-                <p>{{ book.image == null ? '' : book.image }}</p>
+
                 <b class="text-muted">Год публикации:</b>
                 <p>{{ book.yearPublic }}</p>
                 <b class="text-muted">Список авторов:</b>
                 <p>{{ book.getAuthorsList() }}</p>
             </div>
+            <b class="text-muted">Обложка:</b>
+            <img  src="data:image/jpg;base64,{{ book.image}}" alt="1" />
         </div>
     </div>
 {% endblock %}

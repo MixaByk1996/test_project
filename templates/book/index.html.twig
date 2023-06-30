@@ -140,7 +140,7 @@
                         <th>Авторы</th>
                         <th>Описание</th>
                         <th>Обложка</th>
-                        <th>Год выпуска</th>
+                        <th>Год публикации</th>
                         <th width="240px">Действия</th>
                     </tr>
                     {% for book in books %}
@@ -149,7 +149,7 @@
                             <td>{{ book.name }}</td>
                             <td>{{ book.getAuthorsList()  }}</td>
                             <td>{{ book.description }}</td>
-                            <td><img alt="" src="{{ book.image}}" /></td>
+                            <td><img width="250" height="250" src="data:image/jpg;base64,{{ book.image}}" alt="1" /></td>
                             <td>{{ book.yearPublic }}</td>
                             <td>
                                 <form method="post" action="{{ path('app_book_delete', {'id': book.id}) }}" onsubmit="return confirm('Вы действительно хотите удалить запись?');">

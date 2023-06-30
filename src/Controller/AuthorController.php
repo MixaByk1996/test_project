@@ -37,6 +37,7 @@ class AuthorController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $author->setCountBooks(0);
+
             $authorRepository->add($author);
             return $this->redirectToRoute('app_author_index', [], Response::HTTP_SEE_OTHER);
         }
