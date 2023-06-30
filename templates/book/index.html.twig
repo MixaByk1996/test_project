@@ -58,7 +58,7 @@
                 <td>{{ book.id }}</td>
                 <td>{{ book.name }}</td>
                 <td>{{ book.description }}</td>
-                <td><img alt="" src="data:image/png;base64,{{ book.image}}" /></td>
+                <td><img alt="" src="{{ book.image.getImg()}}" /></td>
                 <td>{{ book.yearPublic }}</td>
                 <td>
                     <a href="{{ path('app_book_show', {'id': book.id}) }}">Показать</a>

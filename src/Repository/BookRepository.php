@@ -6,6 +6,7 @@ use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -46,6 +47,10 @@ class BookRepository extends ServiceEntityRepository
         }
     }
 
+    public function getCount(int $author_id){
+
+
+    }
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

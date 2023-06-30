@@ -51,20 +51,9 @@ class BookController extends AbstractController
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $book->setImage(file_get_contents($book->getImage()));
             $bookRepository->add($book);
-            foreach ($book->getAuthorBooks() as $author){
-                $em = $this->getDoctrine()->getManager();
-
-                $RAW_QUERY = 'SELECT * FROM author_books where author_books.author_id = '. $author->id;
-
-                $statement = $em->getConnection()->prepare($RAW_QUERY);
-                $statement->execute();
-
-                $result = $statement->fetchAll();
-                dd($result);
-            }
             return $this->redirectToRoute('app_book_index', [], Response::HTTP_SEE_OTHER);
         }
 

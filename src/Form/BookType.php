@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use Doctrine\DBAL\Types\BlobType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +16,7 @@ class BookType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image')
+            ->add('image', FileType::class)
             ->add('year_public')
             ->add('authorBooks')
         ;
