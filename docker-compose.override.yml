@@ -1,8 +1,13 @@
 version: '3'
 
 services:
-###> doctrine/doctrine-bundle ###
-  database:
+  php:
+    image: php-7.4-fpm
+
+  nginx:
+    image: nginx:latest
     ports:
-      - "5432"
-###< doctrine/doctrine-bundle ###
+      - 80:80
+  #
+  db:
+    image: mysql:8
